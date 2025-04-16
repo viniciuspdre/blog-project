@@ -17,13 +17,8 @@ client/.env.production.local
 server/node_modules/
 server/dist/
 server/build/
-server/yarn-error.log
+server/.env
 server/.env.local
 server/.env.development.local
 server/.env.test.local
 server/.env.production.local
-
-# Outros (opcional)
-node_modules/ # Se você tiver algum node_modules na raiz (geralmente não é o caso com essa arquitetura)
-yarn.lock
-package-lock.json

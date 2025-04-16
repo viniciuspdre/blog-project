@@ -10,7 +10,7 @@ Este projeto é uma plataforma completa de Blog e Sistema de Gerenciamento de Co
 
 * **Framework:** [Next.js](https://nextjs.org/) (versão 13 ou superior - utilizando a estrutura de diretórios `app` ou `pages`)
 * **Biblioteca:** [React](https://react.dev/)
-* **Linguagem:** [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) (com possíveis extensões como JSX)
+* **Linguagem:** [Typescript]
 * **Gerenciamento de Estado:** (A ser definido - pode ser Context API, Redux, Zustand, etc.)
 * **Estilização:** (A ser definido - pode ser CSS Modules, Styled Components, Tailwind CSS, etc.)
 * **Outras Bibliotecas:** (A serem adicionadas conforme necessário - por exemplo, para formulários, validação, etc.)
