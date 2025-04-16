@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  Int       @id @default(autoincrement()) @map("id")
+  name                String    @map("name")
+  email               String    @unique @map("email")
+  password_hash       String    @map("password_hash")
+  bio                 String?   @map("bio")
+  profile_picture_url String?   @map("profile_picture_url")
+  role                String    @default("reader") @map("role")
+  is_active           Boolean   @default(true) @map("is_active")
+  created_at          DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updated_at          DateTime  @default(now()) @map("updated_at") @db.Timestamptz
+  posts               Post[]
+  comments            Comment[]
+}
+
+model Category {
+  id          Int      @id @default(autoincrement()) @map("id")
+  name        String   @unique @map("name") @db.VarChar(100)
+  slug        String   @unique @map("slug") @db.VarChar(100)
+  description String?  @map("description") @db.Text
+  created_at  DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updated_at  DateTime @default(now()) @map("updated_at") @db.Timestamptz
+  posts       Post[]
+}
+
+model Post {
+  id              Int       @id @default(autoincrement()) @map("id")
+  title           String    @map("title") @db.VarChar(255)
+  slug            String    @unique @map("slug") @db.VarChar(255)
+  excerpt         String?   @map("excerpt") @db.Text
+  content         String    @map("content") @db.Text
+  cover_image_url String?   @map("cover_image_url") @db.VarChar(512)
+  status          String    @default("draft") @map("status") @db.VarChar(50)
+  published_at    DateTime? @map("published_at") @db.Timestamptz
+  created_at      DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updated_at      DateTime  @default(now()) @map("updated_at") @db.Timestamptz
+  author          User      @relation(fields: [authorId], references: [id], map: "posts_author_id_fkey")
+  authorId        Int       @map("author_id")
+  category        Category  @relation(fields: [categoryId], references: [id], map: "posts_category_id_fkey")
+  categoryId      Int       @map("category_id")
+  tags            Tag[]     @relation("PostToTag")
+  comments        Comment[]
+}
+
+model Tag {
+  id         Int      @id @default(autoincrement()) @map("id")
+  name       String   @unique @map("name") @db.VarChar(50)
+  slug       String   @unique @map("slug") @db.VarChar(50)
+  created_at DateTime @default(now()) @map("created_at") @db.Timestamptz
+  posts      Post[]   @relation("PostToTag")
+}
+
+model Comment {
+  id              Int       @id @default(autoincrement()) @map("id")
+  content         String    @map("content") @db.Text
+  created_at      DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updated_at      DateTime  @default(now()) @map("updated_at") @db.Timestamptz
+  author          User      @relation(fields: [authorId], references: [id], map: "comments_author_id_fkey")
+  authorId        Int       @map("author_id")
+  post            Post      @relation(fields: [postId], references: [id], onDelete: Cascade, map: "comments_post_id_fkey")
+  postId          Int       @map("post_id")
+  parentComment   Comment?  @relation("CommentToComment", fields: [parentCommentId], references: [id], onDelete: Cascade, map: "comments_parent_comment_id_fkey")
+  parentCommentId Int?      @map("parent_comment_id")
+  replies         Comment[] @relation("CommentToComment")
+}

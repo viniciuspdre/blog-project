@@ -30,7 +30,7 @@ Este projeto é uma plataforma completa de Blog e Sistema de Gerenciamento de Co
 ### Banco de Dados
 
 * **Sistema de Gerenciamento de Banco de Dados Relacional (SGBDR):** [PostgreSQL](https://www.postgresql.org/)
-* **ORM (Object-Relational Mapper):** [Prisma](https://www.prisma.io/) ou [Sequelize](https://sequelize.org/) (Escolher um para facilitar a interação com o PostgreSQL)
+* **ORM (Object-Relational Mapper):** [Prisma](https://www.prisma.io/)
 
 ### Storage
 
