@@ -1,0 +1,29 @@
+# Geral
+.DS_Store
+.env
+
+# Cliente (Next.js)
+client/node_modules/
+client/.next/
+client/out/
+client/build/
+client/yarn-error.log
+client/.env.local
+client/.env.development.local
+client/.env.test.local
+client/.env.production.local
+
+# Servidor (Node.js/Express)
+server/node_modules/
+server/dist/
+server/build/
+server/yarn-error.log
+server/.env.local
+server/.env.development.local
+server/.env.test.local
+server/.env.production.local
+
+# Outros (opcional)
+node_modules/ # Se você tiver algum node_modules na raiz (geralmente não é o caso com essa arquitetura)
+yarn.lock
+package-lock.json
