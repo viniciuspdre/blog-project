@@ -1,25 +1,31 @@
-import AWS from 'aws-sdk';
-
-const s3 = new AWS.S3({
-  region: process.env.AWS_REGION,
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-});
+import { ObjectCannedACL, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
 export const uploadToS3 = async (file: Express.Multer.File): Promise<string> => {
   try {
     const params = {
-      Bucket: process.env.S3_BUCKET_NAME!, 
-      Key: `users/profile-pictures/${Date.now()}-${file.originalname}`, 
-      Body: file.buffer,
-      ContentType: file.mimetype,
-      ACL: 'public-read', 
+      Bucket: process.env.S3_BUCKET_NAME!, // obrigatoriamente o nome do bucket
+      Key: `users/profile-pictures/${Date.now()}-${file.originalname}`, // caminho do arquivo no S3
+      Body: file.buffer, // conteudo do arquivo
+      ContentType: file.mimetype, // tipo do arquivo
+      ACL: ObjectCannedACL.public_read, // faz com que seja de acesso publico
     };
 
-    const uploadedImage = await s3.upload(params).promise();
-    return uploadedImage.Location;
-  } catch (error) {
-    console.error('Erro ao enviar imagem para o S3:', error);
-    throw error;
-  }
-};
+    const s3Client = new S3Client([{
+      region: process.env.AWS_REGION,
+
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      }
+    }]);
+
+    await s3Client.send(
+      new PutObjectCommand(params)
+    )
+
+    const url: string = `https://${params.Bucket}.s3.amazonaws.com/${params.Key}`
+    return url
+} catch (error) {
+  console.log(error);
+  return `${error}`
+}};

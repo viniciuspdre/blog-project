@@ -1,11 +1,11 @@
-import { PrismaClient } from "@prisma/client";
-import { User } from "../../prisma/generated/prisma";
+//import {  } from "@prisma/client";
+import { PrismaClient, User } from "../../prisma/generated/prisma";
 
 const prisma = new PrismaClient();
 
-const insertUserRepo = async (name: string, email: string, password_hash: string, profile_picture_url: string) => {
+const registerUserRepo = async (name: string, email: string, password_hash: string, profile_picture_url: string | null) => {
   try {
-    const newUser: User = await prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         name,
         email,
@@ -33,4 +33,4 @@ const insertUserRepo = async (name: string, email: string, password_hash: string
   }
 }
 
-export { insertUserRepo };
+export { registerUserRepo };
