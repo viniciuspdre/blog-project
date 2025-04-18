@@ -117,7 +117,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UserScalarFieldEnum = {
+exports.Prisma.UsersScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
@@ -130,7 +130,7 @@ exports.Prisma.UserScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
-exports.Prisma.CategoryScalarFieldEnum = {
+exports.Prisma.CategoriesScalarFieldEnum = {
   id: 'id',
   name: 'name',
   slug: 'slug',
@@ -139,7 +139,7 @@ exports.Prisma.CategoryScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
-exports.Prisma.PostScalarFieldEnum = {
+exports.Prisma.PostsScalarFieldEnum = {
   id: 'id',
   title: 'title',
   slug: 'slug',
@@ -154,14 +154,14 @@ exports.Prisma.PostScalarFieldEnum = {
   categoryId: 'categoryId'
 };
 
-exports.Prisma.TagScalarFieldEnum = {
+exports.Prisma.TagsScalarFieldEnum = {
   id: 'id',
   name: 'name',
   slug: 'slug',
   created_at: 'created_at'
 };
 
-exports.Prisma.CommentScalarFieldEnum = {
+exports.Prisma.CommentsScalarFieldEnum = {
   id: 'id',
   content: 'content',
   created_at: 'created_at',
@@ -188,11 +188,11 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User',
-  Category: 'Category',
-  Post: 'Post',
-  Tag: 'Tag',
-  Comment: 'Comment'
+  Users: 'Users',
+  Categories: 'Categories',
+  Posts: 'Posts',
+  Tags: 'Tags',
+  Comments: 'Comments'
 };
 
 /**

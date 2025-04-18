@@ -9,4 +9,4 @@ const upload = multer({ storage: storage });
 
 // inserts
 
-router.post("/api/register/user", upload.single('profilePicture'), registerUserController)
+router.post("/user/register", upload.single('profilePicture'), registerUserController)

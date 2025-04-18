@@ -1,17 +1,19 @@
 import express from 'express';
 import cors from 'cors';
-import { router } from './routes/routes'
+import { router } from './routes/routes' 
 
 export const createApp = () => {
   const app = express();
-  
-  app.use("/api", router)
 
   const corsOptions = {
-    origin: "*",
+    origin: "*", 
     methods: ["GET", "POST", "PUT", "DELETE"],
   }
-
   app.use(cors(corsOptions));
+
+  app.use(express.json());
+
+  app.use("/api", router);
+
   return app;
 }

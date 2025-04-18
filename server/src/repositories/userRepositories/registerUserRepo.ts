@@ -1,11 +1,11 @@
 //import {  } from "@prisma/client";
-import { PrismaClient, User } from "../../prisma/generated/prisma";
+import { PrismaClient, Users } from "../../prisma/generated/prisma";
 
 const prisma = new PrismaClient();
 
 const registerUserRepo = async (name: string, email: string, password_hash: string, profile_picture_url: string | null) => {
   try {
-    const newUser = await prisma.user.create({
+    const newUser = await prisma.users.create({
       data: {
         name,
         email,
