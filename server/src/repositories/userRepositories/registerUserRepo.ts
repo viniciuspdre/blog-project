@@ -3,7 +3,7 @@ import { PrismaClient, Users } from "../../prisma/generated/prisma";
 
 const prisma = new PrismaClient();
 
-const registerUserRepo = async (name: string, email: string, password_hash: string, profile_picture_url: string | null) => {
+const registerUserRepo = async (name: string, email: string, password_hash: string, profile_picture_url: string | null, role: string) => {
   try {
     const newUser = await prisma.users.create({
       data: {

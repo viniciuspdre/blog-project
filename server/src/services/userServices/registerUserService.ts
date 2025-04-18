@@ -6,7 +6,7 @@ import { HttpResponse } from "../../models/http-response-models";
 import { PrismaClient } from "../../prisma/generated/prisma";
 
 
-const registerUserService = async (name: string, email: string, password_hash: string, profile_picture_url: Express.Multer.File | undefined): Promise<HttpResponse> => {
+const registerUserService = async (name: string, email: string, password_hash: string, profile_picture_url: Express.Multer.File | undefined, role: string): Promise<HttpResponse> => {
 
   let response: HttpResponse | null = null;
 
@@ -29,7 +29,7 @@ const registerUserService = async (name: string, email: string, password_hash: s
     profilePictureUrl = await uploadToS3(profile_picture_url);
   }
 
-  const newUser = await registerUserRepo(name, email, hashedPassword, profilePictureUrl);
+  const newUser = await registerUserRepo(name, email, hashedPassword, profilePictureUrl, role);
   response = await created(newUser)
   return response;
 }
