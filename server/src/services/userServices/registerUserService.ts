@@ -26,7 +26,7 @@ const registerUserService = async (name: string, email: string, password_hash: s
 
   let profilePictureUrl: string | null = null;
   if (profile_picture_url) {
-    profilePictureUrl = await uploadToS3(profile_picture_url);
+    profilePictureUrl = await uploadToS3(profile_picture_url, 'users/profile-pictures/');
   }
 
   const newUser = await registerUserRepo(name, email, hashedPassword, profilePictureUrl, role);

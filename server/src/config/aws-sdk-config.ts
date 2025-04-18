@@ -1,10 +1,10 @@
 import { ObjectCannedACL, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
-export const uploadToS3 = async (file: Express.Multer.File): Promise<string> => {
+export const uploadToS3 = async (file: Express.Multer.File, key: string): Promise<string> => {
   try {
     const params = {
       Bucket: process.env.S3_BUCKET_NAME!, // obrigatoriamente o nome do bucket
-      Key: `users/profile-pictures/${Date.now()}-${file.originalname}`, // caminho do arquivo no S3
+      Key: `${key}${Date.now()}-${file.originalname}`, // caminho do arquivo no S3
       Body: file.buffer, // conteudo do arquivo
       ContentType: file.mimetype, // tipo do arquivo
       ACL: ObjectCannedACL.public_read, // faz com que seja de acesso publico
