@@ -1,10 +1,19 @@
 import express from 'express';
 import cors from 'cors';
+import { router } from './routes/routes' 
 
-const app = express();
-const PORT = process.env.PORT;
+export const createApp = () => {
+  const app = express();
 
+  const corsOptions = {
+    origin: "*", 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  }
+  app.use(cors(corsOptions));
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-})
+  app.use(express.json());
+
+  app.use("/api", router);
+
+  return app;
+}

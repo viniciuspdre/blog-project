@@ -2,7 +2,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output = "../src/generated/prisma"
+  output = "./generated/prisma"
 }
 
 datasource db {
@@ -11,7 +11,7 @@ datasource db {
 }
 
 
-model User {
+model Users {
   id                Int       @id @default(autoincrement()) @map("id")
   name              String    @map("name")
   email             String    @unique @map("email")
@@ -22,21 +22,21 @@ model User {
   is_active         Boolean   @default(true) @map("is_active")
   created_at        DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updated_at        DateTime  @default(now()) @map("updated_at") @db.Timestamptz
-  posts             Post[]
-  comments          Comment[]
+  posts             Posts[]
+  comments          Comments[]
 }
 
-model Category {
+model Categories {
   id          Int       @id @default(autoincrement()) @map("id")
   name        String    @unique @map("name") @db.VarChar(100)
   slug        String    @unique @map("slug") @db.VarChar(100)
   description String?   @map("description") @db.Text
   created_at  DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updated_at  DateTime  @default(now()) @map("updated_at") @db.Timestamptz
-  posts       Post[]
+  posts       Posts[]
 }
 
-model Post {
+model Posts {
   id             Int        @id @default(autoincrement()) @map("id")
   title          String     @map("title") @db.VarChar(255)
   slug           String     @unique @map("slug") @db.VarChar(255)
@@ -47,32 +47,32 @@ model Post {
   published_at   DateTime?  @map("published_at") @db.Timestamptz
   created_at     DateTime   @default(now()) @map("created_at") @db.Timestamptz
   updated_at     DateTime   @default(now()) @map("updated_at") @db.Timestamptz
-  author         User       @relation(fields: [authorId], references: [id], map: "posts_author_id_fkey")
+  author         Users       @relation(fields: [authorId], references: [id], map: "posts_author_id_fkey")
   authorId       Int        @map("author_id")
-  category       Category   @relation(fields: [categoryId], references: [id], map: "posts_category_id_fkey")
+  category       Categories   @relation(fields: [categoryId], references: [id], map: "posts_category_id_fkey")
   categoryId     Int        @map("category_id")
-  tags           Tag[]      @relation("PostToTag")
-  comments       Comment[]
+  tags           Tags[]      @relation("PostsToTags")
+  comments       Comments[]
 }
 
-model Tag {
+model Tags {
   id         Int      @id @default(autoincrement()) @map("id")
   name       String   @unique @map("name") @db.VarChar(50)
   slug       String   @unique @map("slug") @db.VarChar(50)
   created_at DateTime @default(now()) @map("created_at") @db.Timestamptz
-  posts      Post[]   @relation("PostToTag")
+  posts      Posts[]   @relation("PostsToTags")
 }
 
-model Comment {
+model Comments {
   id              Int        @id @default(autoincrement()) @map("id")
   content         String     @map("content") @db.Text
   created_at      DateTime   @default(now()) @map("created_at") @db.Timestamptz
   updated_at      DateTime   @default(now()) @map("updated_at") @db.Timestamptz
-  author          User       @relation(fields: [authorId], references: [id], map: "comments_author_id_fkey")
+  author          Users      @relation(fields: [authorId], references: [id], map: "comments_author_id_fkey")
   authorId        Int        @map("author_id")
-  post            Post       @relation(fields: [postId], references: [id], onDelete: Cascade, map: "comments_post_id_fkey")
+  post            Posts       @relation(fields: [postId], references: [id], onDelete: Cascade, map: "comments_post_id_fkey")
   postId          Int        @map("post_id")
-  parentComment   Comment?   @relation("CommentToComment", fields: [parentCommentId], references: [id], onDelete: Cascade, map: "comments_parent_comment_id_fkey")
+  parentComment   Comments?   @relation("CommentToComment", fields: [parentCommentId], references: [id], onDelete: Cascade, map: "comments_parent_comment_id_fkey")
   parentCommentId Int?       @map("parent_comment_id")
-  replies         Comment[]  @relation("CommentToComment")
+  replies         Comments[]  @relation("CommentToComment")
 }
