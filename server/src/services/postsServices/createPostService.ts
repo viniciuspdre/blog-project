@@ -24,7 +24,7 @@ const createPostService = async (data: CreatePostServiceData): Promise<HttpRespo
       try {
         coverImageUrl = await uploadToS3(coverImageFile, 'posts/cover-images');
       } catch (s3Error) {
-        console.error("Erro no upload da iamgem.", s3Error);
+        console.error("Erro no upload da imagem.", s3Error);
         response = await internalServerError("Erro ao fazer upload da imagem da capa");
         return response
       }
