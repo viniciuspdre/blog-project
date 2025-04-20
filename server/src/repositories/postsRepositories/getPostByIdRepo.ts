@@ -5,7 +5,7 @@ const getPostByIdRepo = async (id: number) => {
   const prisma = new PrismaClient();
 
   try {
-    const post = prisma.posts.findUnique(
+    const post = await prisma.posts.findUnique(
       {
         where: { id },
         select: {

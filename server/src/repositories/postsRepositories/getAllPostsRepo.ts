@@ -6,7 +6,7 @@ const getAllPlayersRepo = async () => {
 
   try {
     
-    return prisma.posts.findMany();
+    return await prisma.posts.findMany();
 
   } catch (error) {
 

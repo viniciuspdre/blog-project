@@ -18,8 +18,8 @@ const updateUserService = async (id: number, name?: string, bio?: string, profil
 
     let data: UpdateUserData = {};
 
-    if (!name) data.name = name;
-    if (!bio) data.bio = bio;
+    if (name?.length !== 0) data.name = name;
+    if (bio?.length !== 0) data.bio = bio;
 
     if (profilePicture) {
       const profilePictureUrl = await uploadToS3(profilePicture, 'users/profile-pictures/')

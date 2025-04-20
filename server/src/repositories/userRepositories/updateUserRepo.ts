@@ -6,7 +6,7 @@ const updateUserRepo = async (id: number, data: UpdateUserData) => {
   const prisma = new PrismaClient();
 
   try {
-    const updatedUser = prisma.users.update({
+    const updatedUser = await prisma.users.update({
       where: { id },
       data: {
         name: data.name,

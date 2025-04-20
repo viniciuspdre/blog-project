@@ -17,7 +17,7 @@ const upload = multer({ storage: storage });
 router.get("/user/:id", checkToken, getUserController);
 router.post("/auth/register", upload.single('profilePicture'), registerUserController);
 router.post("/auth/login", authUserController);
-router.put("/user/:id", upload.single('profilePicture'), updateUserController);
+router.put("/user/:id", checkToken, upload.single('profilePicture'), updateUserController);
 // add in future route to delete user (deactivate account) it will maybe change auth logic, but we can see soon
 
 
