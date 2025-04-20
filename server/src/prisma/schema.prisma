@@ -21,7 +21,7 @@ model Users {
   role              String    @default("reader") @map("role")
   is_active         Boolean   @default(true) @map("is_active")
   created_at        DateTime  @default(now()) @map("created_at") @db.Timestamptz
-  updated_at        DateTime  @default(now()) @map("updated_at") @db.Timestamptz
+  updated_at        DateTime  @updatedAt @map("updated_at") @db.Timestamptz
   posts             Posts[]
   comments          Comments[]
 }

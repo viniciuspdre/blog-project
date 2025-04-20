@@ -7,6 +7,7 @@ import { checkToken } from "../utils/check-jwt";
 import { createPostController } from "../controllers/postsController/createPostController";
 import { getAllPostsController } from "../controllers/postsController/getAllPostsController";
 import { getPostByIdController } from "../controllers/postsController/getPostByIdController";
+import { updateUserController } from "../controllers/userController/updateUserController";
 
 export const router = Router();
 const storage = multer.memoryStorage();
@@ -16,7 +17,7 @@ const upload = multer({ storage: storage });
 router.get("/user/:id", checkToken, getUserController);
 router.post("/auth/register", upload.single('profilePicture'), registerUserController);
 router.post("/auth/login", authUserController);
-// add in future route to update user (prof_pic and bio)
+router.put("/user/:id", upload.single('profilePicture'), updateUserController);
 // add in future route to delete user (deactivate account) it will maybe change auth logic, but we can see soon
 
 
