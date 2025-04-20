@@ -5,6 +5,8 @@ import { authUserController } from "../controllers/userController/authUserContro
 import { getUserController } from "../controllers/userController/getUserController";
 import { checkToken } from "../utils/check-jwt";
 import { createPostController } from "../controllers/postsController/createPostController";
+import { getAllPostsController } from "../controllers/postsController/getAllPostsController";
+import { getPostByIdController } from "../controllers/postsController/getPostByIdController";
 
 export const router = Router();
 const storage = multer.memoryStorage();
@@ -20,4 +22,5 @@ router.post("/auth/login", authUserController);
 
 // post routes
 router.post("/post/create", checkToken, upload.single('coverImage'), createPostController);
-
+router.get("/posts", getAllPostsController);
+router.get("/post/:id", getPostByIdController);

@@ -15,7 +15,7 @@ const createPostRepo = async (data: CreatePostData) => {
         content: data.content,
         cover_image_url: data.cover_image_url,
         author: {
-          connect: { id: data.authorId }
+          connect: { id: data.authorId },
         },
         category: {
           connect: { id: data.categoryId }
@@ -25,7 +25,16 @@ const createPostRepo = async (data: CreatePostData) => {
         }
       },
       include: {
-        author: true,
+        author: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            bio: true,
+            profile_picture_url: true,
+            role: true
+          }
+        },
         category: true,
         tags: true
       }
