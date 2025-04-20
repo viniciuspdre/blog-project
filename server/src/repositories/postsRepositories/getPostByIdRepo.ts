@@ -23,6 +23,7 @@ const getPostByIdRepo = async (id: number) => {
       return post;
   } catch (error) {
     console.error("Error getting data about post", error);
+    throw error;
   }
 }
 
