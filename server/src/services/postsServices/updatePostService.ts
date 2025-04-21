@@ -5,7 +5,7 @@ import { updatePostRepo } from "../../repositories/postsRepositories/updatePostR
 import { badRequest, internalServerError, ok } from "../../utils/http-helper";
 
 
-const updatePostService = async (id: number, title?: string, content?: string, coverPicture?: Express.Multer.File | undefined): Promise<HttpResponse> => {
+const updatePostService = async (id: number, title?: string, content?: string, coverPicture?: Express.Multer.File | undefined, status?: string): Promise<HttpResponse> => {
   let response: HttpResponse | null = null;
 
   try {
@@ -22,6 +22,9 @@ const updatePostService = async (id: number, title?: string, content?: string, c
       data.slug = title?.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
     }
     if (content?.length !== 0) data.content = content;
+    if (status?.toLowerCase() === "published") {
+      data.status = status;
+    }
 
     if (coverPicture) {
       const coverPictureUrl = await uploadToS3(coverPicture, 'posts/cover-images')

@@ -4,4 +4,5 @@ export interface UpdatePostData {
   content?: string;
   cover_image_url?: string;
   slug?: string;
+  status?: string;
 }

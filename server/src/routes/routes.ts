@@ -10,6 +10,7 @@ import { getPostByIdController } from "../controllers/postsController/getPostByI
 import { updateUserController } from "../controllers/userController/updateUserController";
 import { deleteUserController } from "../controllers/userController/deleteUserController";
 import { updatePostController } from "../controllers/postsController/updatePostController";
+import { deletePostController } from "../controllers/postsController/deletePostController";
 
 export const router = Router();
 const storage = multer.memoryStorage();
@@ -27,3 +28,4 @@ router.post("/post/create", checkToken, upload.single('coverImage'), createPostC
 router.get("/posts", getAllPostsController);
 router.get("/post/:id", getPostByIdController);
 router.put("/post/:id", checkToken, upload.single('coverImage'), updatePostController)
+router.delete("/post/:id", checkToken, deletePostController);

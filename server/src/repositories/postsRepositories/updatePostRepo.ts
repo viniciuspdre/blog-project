@@ -12,7 +12,8 @@ const updatePostRepo = async (id: number, data: UpdatePostData) => {
         title: data.title,
         content: data.content,
         cover_image_url: data.cover_image_url,
-        slug: data.slug
+        slug: data.slug,
+        status: data.status
       }
     });
 
