@@ -1,7 +1,6 @@
-'use client'
 // import type { Metadata } from "next";
 
-import LoginForm from "@/components/molecules/loginForm";
+import LoginForm from "@/components/organisms/loginForm";
 
 // export const metadata: Metadata = {
 //   title: "Realize seu Login",

@@ -62,7 +62,7 @@ const authUserService = async (email: string, password_hash: string): Promise<Ht
       }
     )
 
-    response = await ok(token);
+    response = await ok({token, user});
   } catch (error) {
     console.log(error);
 

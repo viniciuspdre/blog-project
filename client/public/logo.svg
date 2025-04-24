@@ -1,0 +1,18 @@
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Define the cut-out text -->
+    <mask id="text-mask">
+      <!-- Full solid shape in white -->
+      <rect width="300" height="200" fill="white"/>
+      <!-- Transparent text 'cut out' of the mask -->
+      <text x="75" y="125" font-family="Linden Hill, serif" font-size="60" fill="black">blog</text>
+    </mask>
+  </defs>
+
+  <!-- Abstract filled shape with mask applied -->
+  <path
+    d="M80 20C130 -10 240 20 260 80C274 120 230 160 180 165C140 170 110 190 90 185C60 177 40 150 30 110C20 70 30 40 50 30C60 25 70 25 80 20Z"
+    fill="#5E94E5"
+    mask="url(#text-mask)"
+  />
+</svg>
