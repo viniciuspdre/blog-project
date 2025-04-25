@@ -1,8 +1,9 @@
 
-
 export interface InputProps {
   placeholder?: string;
-  value: string;
+  value?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
+  name: string
+  required: boolean
 }
